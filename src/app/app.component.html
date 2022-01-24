@@ -1,21 +1,52 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+<!-- Toolbar -->
+<div class="toolbar">
+  <p>ระบบบันทึกข้อมูล</p>
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<!-- content -->
+<div class="content">
+  <div class="row">
+    <div class="col-xxl-6 col-xl-6 col-lg-6 col-sm-12 col-12">
+      <h4>กรอกข้อมูลส่วนตัว</h4>
+      <form [formGroup]="dataForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3 mt-3">
+          <label for="id">รหัสประจำตัว: </label>
+          <input type="id" class="form-control" placeholder="Enter id" formControlName="id" />
+        </div>
+        <div class="mb-3 mt-3">
+          <label for="name">ชื่อ - สกุล:</label>
+          <input type="name" class="form-control"  placeholder="Enter name"
+            formControlName="name" />
+        </div>
+        <div class="mb-3">
+          <label for="age">อายุ:</label>
+          <input type="age" class="form-control" placeholder="Enter age"formControlName="age" />
+        </div>
 
-<router-outlet></router-outlet>
+        <div class="mb-3">
+          <label for="address">ที่อยู่:</label>
+          <input type="address" class="form-control" placeholder="Enter address"
+            formControlName="address" />
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+
+    <div class="col-xxl-6 col-xl-6 col-lg-6 col-sm-12 col-12">
+      <h4>ข้อมูลส่วนตัว</h4>
+      <ul>
+        <li class="list-group-item" *ngFor="let doc of myArray | async">
+          รหัสประจำตัว: {{doc.id}} &nbsp;
+          ชื่อ - สกุล: {{doc.name}}  &nbsp;
+          อายุ: {{doc.age}}  &nbsp;
+          ที่อยู่: {{doc.address}}  &nbsp;
+          <button type="button" class="btn btn-warning" (click)="onEdit(doc)">Edit</button>  &nbsp;
+          <button type="button" class="btn btn-danger" (click)="onDelete(doc.id, doc.name)">Delete</button>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+
+
+</div>
+
